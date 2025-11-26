@@ -25,6 +25,13 @@ module "network" {
   base_tags = local.base_tags
 }
 
+module "iam" {
+  source = "../../modules/iam"
+
+  project_name = var.project_name
+  environment  = var.environment
+}
+
 module "application" {
   source = "../../modules/application"
 
@@ -35,9 +42,10 @@ module "application" {
   volume_type   = "gp3"
   volume_size   = 20
 
-  vpc_id = module.network.vpc_id
-  public_subnet_id = module.network.public_subnet_a_id
-  key_pair_name    = module.compute.key_pair_name
+  vpc_id                     = module.network.vpc_id
+  public_subnet_id           = module.network.public_subnet_a_id
+  key_pair_name              = module.compute.key_pair_name
+  iam_instance_profile_name  = module.iam.instance_profile_name
 
   base_tags = local.base_tags
 }
