@@ -42,3 +42,9 @@ variable "key_pair_name" {
   type        = string
   description = "Key pair name for SSH access to EC2"
 }
+
+variable "iam_instance_profile_name" {
+  type        = string
+  description = "IAM instance profile name for CloudWatch Agent"
+}
+

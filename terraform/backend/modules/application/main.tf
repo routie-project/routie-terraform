@@ -57,6 +57,9 @@ resource "aws_instance" "app_instance" {
 
   key_name = var.key_pair_name
 
+  # CloudWatch Agent를 위한 IAM Instance Profile 연결
+  iam_instance_profile = var.iam_instance_profile_name
+
   root_block_device {
     volume_type           = var.volume_type
     volume_size           = var.volume_size
@@ -69,7 +72,10 @@ resource "aws_instance" "app_instance" {
     http_tokens   = "required"
   }
 
-  user_data_base64 = filebase64("${path.module}/user_data.tpl")
+  user_data = templatefile("${path.module}/user_data.tpl", {
+    environment       = var.environment
+    environment_title = title(var.environment)
+  })
 
   tags = merge(var.base_tags, {
     Name = "${var.project_name}-${var.environment}-app"
