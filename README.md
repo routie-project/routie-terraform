@@ -124,7 +124,6 @@ aws cloudfront create-invalidation \
   --paths "/*"
 ```
 
-## 💰 예상 비용 (월간, dev 환경)
 # EC2 접속 (환경별 키 사용)
 # Dev 환경
 ssh -i ~/.ssh/routie-dev-private-key.pem ubuntu@<DEV_ELASTIC_IP>
