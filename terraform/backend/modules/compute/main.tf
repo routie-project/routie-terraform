@@ -4,7 +4,7 @@ resource "tls_private_key" "private_key" {
 }
 
 resource "aws_key_pair" "key_pair" {
-  key_name   = "${var.project_name}-key-pair"
+  key_name   = "${var.project_name}-${var.environment}-key-pair"
   public_key = tls_private_key.private_key.public_key_openssh
 }
 
@@ -12,7 +12,7 @@ resource "aws_s3_bucket" "key_storage" {
   bucket = var.s3_bucket_name
 
   tags = merge(var.base_tags, {
-    Name = "${var.project_name}-key-storage"
+    Name = "${var.project_name}-${var.environment}-key-storage"
   })
 }
 
@@ -51,6 +51,6 @@ resource "aws_s3_object" "private_key" {
   server_side_encryption = "AES256"
 
   tags = merge(var.base_tags, {
-    Name = "${var.project_name}-private-key"
+    Name = "${var.project_name}-${var.environment}-private-key"
   })
 }

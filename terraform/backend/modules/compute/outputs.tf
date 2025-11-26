@@ -12,3 +12,4 @@ output "s3_key_path" {
   description = "S3 object key path for the private key"
   value       = aws_s3_object.private_key.key
 }
+
