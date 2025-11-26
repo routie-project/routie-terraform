@@ -19,5 +19,5 @@ variable "area" {
 variable "environments" {
   type        = list(string)
   description = "List of deployment environments"
-  default     = ["dev"]
+  default     = ["dev", "prod"]
 }
